@@ -7,10 +7,13 @@ from email.mime.text import MIMEText
 
 from backend.requests.email_request import EmailRequest
 
-# Set these environment variables with your email and the generated app password
-os.environ['EMAIL_USER'] = 'halil.ibrahimkuley@gmail.com'
-os.environ['EMAIL_PASSWORD'] = 'pcbw nnkr wpxh wkli'
+from fastapi import HTTPException
+from dotenv import load_dotenv
+import os
 
+
+# Load environment variables from the .env file in the previous folder
+load_dotenv(os.path.join(os.path.dirname(__file__), '../../', '.env'))
 
 class EmailService:
     def __init__(self):
@@ -20,7 +23,7 @@ class EmailService:
         self.password = os.getenv("EMAIL_PASSWORD", "")
 
         if not self.sender_email or not self.password:
-            raise HTTPException(status_code=500, detail="Email credentials not configured")
+            raise HTTPException(status_code=500, detail="Email credentials not configured, please check the .env file")
 
     def send_email(self, email_request: EmailRequest):
         # Create message
