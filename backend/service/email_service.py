@@ -1,19 +1,17 @@
-from fastapi import HTTPException
 import os
 import smtplib
 from email.mime.application import MIMEApplication
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
-from backend.requests.email_request import EmailRequest
-
-from fastapi import HTTPException
 from dotenv import load_dotenv
-import os
+from fastapi import HTTPException
 
+from backend.requests.email_request import EmailRequest
 
 # Load environment variables from the .env file in the previous folder
 load_dotenv(os.path.join(os.path.dirname(__file__), '../../', '.env'))
+
 
 class EmailService:
     def __init__(self):
